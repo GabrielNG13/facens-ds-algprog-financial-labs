@@ -1,6 +1,7 @@
+# Internal imports
+from models.transaction import Transaction
+
 class Initialize():
-    def __init__(self):
-        self.__transactions = []
     
     def show_menu(self):
         print(50 * '-')
@@ -24,13 +25,13 @@ class Initialize():
         value = input('Enter the value of the operation: ')
         description = input('Enter the description: ')
 
-        self.__transactions.append(
-            (operation, value, description)
-        )
+        transacion = Transaction(operation, value, description)
+        transacion.save()
+        del transacion
     
     def to_view(self):
-        for transacion in self.__transactions:
-            print(f'Operation: {transacion[0]} - Value: {transacion[1]} - Description: {transacion[2]}')
+        for transaction in Transaction().view():
+            print(transaction)
     
     def to_go_out(self):
         print('\nThank you, come back often!')
@@ -52,3 +53,11 @@ if __name__ == '__main__':
             init.to_view()
         elif option == '3':
             init.to_go_out()
+
+
+'''
+- Resgatar uma transação
+- Excluir transação
+- Editar transação
+- Fazer o CRUD
+'''
